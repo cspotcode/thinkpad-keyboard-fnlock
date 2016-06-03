@@ -19,3 +19,7 @@
 *.exe
 *.out
 *.app
+thinkpad-compact-bluetooth
+
+# IntelliJ project files
+.idea

@@ -6,19 +6,19 @@
 #
 ###########################################
 
-all: k810
+all: thinkpad-compact-bluetooth
 
 CC=gcc
 CXX=g++
 COBJS=hid.o
-CPPOBJS=./k810.o
+CPPOBJS=./thinkpad-compact-bluetooth.o
 OBJS=$(COBJS) $(CPPOBJS)
 CFLAGS+=-Ihidapi -Wall -g -c 
 LIBS=-framework IOKit -framework CoreFoundation
 
 
-k810: $(OBJS)
-	g++ -Wall -g $^ $(LIBS) -o k810
+thinkpad-compact-bluetooth: $(OBJS)
+	g++ -Wall -g $^ $(LIBS) -o thinkpad-compact-bluetooth
 
 $(COBJS): %.o: %.c
 	$(CC) $(CFLAGS) $< -o $@
