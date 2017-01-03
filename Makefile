@@ -8,25 +8,30 @@
 
 all: thinkpad-compact-bluetooth
 
+OBJDIR=build
+BINDIR=bin
 CC=gcc
 CXX=g++
-COBJS=hid.o
-CPPOBJS=./thinkpad-compact-bluetooth.o
+COBJS=$(OBJDIR)/hid.o
+CPPOBJS=$(OBJDIR)/thinkpad-compact-bluetooth.o
 OBJS=$(COBJS) $(CPPOBJS)
 CFLAGS+=-Ihidapi -Wall -g -c 
 LIBS=-framework IOKit -framework CoreFoundation
 
 
-thinkpad-compact-bluetooth: $(OBJS)
-	g++ -Wall -g $^ $(LIBS) -o thinkpad-compact-bluetooth
+thinkpad-compact-bluetooth: $(OBJS) $(BINDIR)
+	g++ -Wall -g $(OBJS) $(LIBS) -o $(BINDIR)/thinkpad-compact-bluetooth
 
-$(COBJS): %.o: %.c
+$(COBJS): $(OBJDIR)/%.o: %.c $(OBJDIR)
 	$(CC) $(CFLAGS) $< -o $@
 
-$(CPPOBJS): %.o: %.cpp
+$(CPPOBJS): $(OBJDIR)/%.o: %.cpp $(OBJDIR)
 	$(CXX) $(CFLAGS) $< -o $@
 
+$(BINDIR) $(OBJDIR):
+	mkdir -p $@
+
 clean:
-	rm -f *.o hidtest $(CPPOBJS)
+	rm -f $(BINDIR)/hidtest $(OBJS)
 
 .PHONY: clean
