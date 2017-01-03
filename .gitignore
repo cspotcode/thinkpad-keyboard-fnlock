@@ -23,3 +23,6 @@ thinkpad-compact-bluetooth
 
 # IntelliJ project files
 .idea
+
+# VSCode
+.vscode/symbols.json
